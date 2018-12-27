@@ -23,7 +23,10 @@ namespace hw6
 			//B6_P5();
 
 			//B6-P6/6. ReplaceInPoem.
-			B6_P6();
+			//B6_P6();
+
+			//B6-P4/6. *Pyatnashki.
+			B4_P6();
 
 			Console.Read();
 		}
@@ -70,7 +73,7 @@ namespace hw6
 				Console.WriteLine();
 			}
 
-			for(int i = 0; i < maxNumbers.Length; i++)
+			for (int i = 0; i < maxNumbers.Length; i++)
 			{
 				Console.WriteLine($"Max number in row {i} is {maxNumbers[i]}");
 			}
@@ -84,7 +87,7 @@ namespace hw6
 			int[] sortedArr = new int[5];
 			Random randNum = new Random();
 
-			for(int i = 0; i < newArr.Length; i++)
+			for (int i = 0; i < newArr.Length; i++)
 			{
 				newArr[i] = randNum.Next(100);
 				Console.Write($"{newArr[i]} ");
@@ -129,13 +132,13 @@ namespace hw6
 					tmpArr[i] = tmpArr[i + 1];
 					tmpArr[i + 1] = tmpVar;
 
-/*					//Хочу каждую итерацию видеть
-					foreach (int element in tmpArr)
-					{
-						Console.Write($"{element} ");
-					}
-					Console.WriteLine();
-*/
+					/*					//Хочу каждую итерацию видеть
+										foreach (int element in tmpArr)
+										{
+											Console.Write($"{element} ");
+										}
+										Console.WriteLine();
+					*/
 					BubbleSort(tmpArr);
 				}
 			}
@@ -151,7 +154,7 @@ namespace hw6
 			{
 				for (sortedArrEnum = 0; sortedArrEnum < sortedArr.Length; sortedArrEnum++)
 				{
-					if(tmpArr[tmpArrEnum] <= sortedArr[sortedArrEnum])
+					if (tmpArr[tmpArrEnum] <= sortedArr[sortedArrEnum])
 					{
 						int i = 0;
 						while (sortedArr.Length - sortedArrEnum - i - 1 > 0)
@@ -168,13 +171,13 @@ namespace hw6
 				}
 				//Как-то громоздко получилось, мб можно проще
 
-/*				//Хочу каждую итерацию видеть
-				foreach (int element in sortedArr)
-				{
-					Console.Write($"{element} ");
-				}
-				Console.WriteLine();
-*/
+				/*				//Хочу каждую итерацию видеть
+								foreach (int element in sortedArr)
+								{
+									Console.Write($"{element} ");
+								}
+								Console.WriteLine();
+				*/
 			}
 			return sortedArr;
 		}
@@ -243,6 +246,132 @@ namespace hw6
 			{
 				Console.WriteLine(stringArr[i]);
 			}
+		}
+
+
+		//B6-P4/6. *Pyatnashki.
+		public static void B4_P6()
+		{
+			const int AUTHOR_SCORE = 191;
+			int[,] playfield = new int[4, 4]
+			{
+				{9,2,7,11},
+				{0,1,4,10},
+				{5,3,12,6},
+				{15,13,8,14}
+			};
+			int[] currentPosition = new int[2];
+			int tmpVar = 0, userScore = 0;
+			ConsoleKey Button;
+
+			PrintField(playfield, out currentPosition);
+
+			while (CheckCurrentField(playfield) == false)
+			{
+				Button = Console.ReadKey().Key;
+
+				switch ((int)Button)
+				{
+					case 37:
+						//LeftArrow = 37
+						if (currentPosition[0] > 0)
+						{
+							userScore++;
+							tmpVar = playfield[currentPosition[1], currentPosition[0] - 1];
+							playfield[currentPosition[1], currentPosition[0] - 1] = 0;
+							playfield[currentPosition[1], currentPosition[0]] = tmpVar;
+						}
+						break;
+
+					case 38:
+						//UpArrow = 38
+						if (currentPosition[1] > 0)
+						{
+							userScore++;
+							tmpVar = playfield[currentPosition[1] - 1, currentPosition[0]];
+							playfield[currentPosition[1] - 1, currentPosition[0]] = 0;
+							playfield[currentPosition[1], currentPosition[0]] = tmpVar;
+						}
+						break;
+
+					case 39:
+						//RightArrow = 39
+						if (currentPosition[0] < 3)
+						{
+							userScore++;
+							tmpVar = playfield[currentPosition[1], currentPosition[0] + 1];
+							playfield[currentPosition[1], currentPosition[0] + 1] = 0;
+							playfield[currentPosition[1], currentPosition[0]] = tmpVar;
+						}
+						break;
+
+					case 40:
+						//DownArrow = 40
+						if (currentPosition[1] < 3)
+						{
+							userScore++;
+							tmpVar = playfield[currentPosition[1] + 1, currentPosition[0]];
+							playfield[currentPosition[1] + 1, currentPosition[0]] = 0;
+							playfield[currentPosition[1], currentPosition[0]] = tmpVar;
+						}
+						break;
+
+					default:
+						break;
+				}
+				PrintField(playfield, out currentPosition);
+			}
+			Console.WriteLine("\nВы победили! Мои поздравления!!!\n");
+			Console.WriteLine("Спортивного интереса ради:");
+			Console.WriteLine($"Рекорд автора: {AUTHOR_SCORE} шаг");
+			Console.WriteLine($"Ваш результат: {userScore}");
+			}
+
+		public static void PrintField(int[,] playfield, out int[] currentPosition)
+		{
+			currentPosition = new int[2] { 0, 0 };
+
+			Console.Clear();
+			for (int i = 0; i < playfield.GetLength(0); i++)
+			{
+				Console.WriteLine("-------------");
+				for (int j = 0; j < playfield.GetLength(1); j++)
+				{
+					if (playfield[i, j] == 0)
+					{
+						currentPosition[0] = j;
+						currentPosition[1] = i;
+
+						Console.Write("|");
+						Console.BackgroundColor = ConsoleColor.Gray;
+						Console.ForegroundColor = ConsoleColor.Black;
+						Console.Write($"{playfield[i, j]:D2}");
+						Console.BackgroundColor = ConsoleColor.Black;
+						Console.ForegroundColor = ConsoleColor.Gray;
+					}
+					else
+					{
+						Console.Write($"|{playfield[i, j]:D2}");
+					}
+				}
+				Console.Write("|\n");
+			}
+			Console.WriteLine("-------------");
+		}
+
+		public static bool CheckCurrentField(int[,]playfield) 
+		{
+			for (int i = 0; i < playfield.GetLength(0); i++)
+			{
+				for (int j = 0; j < playfield.GetLength(1); j++)
+				{
+					if (playfield[i, j] != playfield.GetLength(0) * i + j)
+					{
+						return false;
+					}
+				}
+			}
+			return true;
 		}
 
 	}

@@ -17,11 +17,16 @@ namespace hw6
 			//B6_P2();
 
 			//B6-P3/6. 1DMasiveSort.
-			B6_P3();
+			//B6_P3();
+
+			//B6-P5/6. CutString.
+			B6_P5();
 
 			Console.Read();
 		}
 
+
+		//B6-P1/6. 1DReadConsoleMassive
 		public static void B6_P1()
 		{
 			int[] newArr = new int[6];
@@ -38,16 +43,18 @@ namespace hw6
 			}
 		}
 
+
+		//B6-P2/6. 3DMassiveMaxInRow.
 		public static void B6_P2()
 		{
-			const int rows = 3, cols = 3;
-			int[,] newArr = new int[rows, cols];
+			const int ROWS = 3, COLS = 3;
+			int[,] newArr = new int[ROWS, COLS];
 			int[] maxNumbers = new int[3];
 			Random randNum = new Random();
 
-			for (int row = 0; row < rows; row++)
+			for (int row = 0; row < ROWS; row++)
 			{
-				for (int col = 0; col < cols; col++)
+				for (int col = 0; col < COLS; col++)
 				{
 					newArr[row, col] = randNum.Next(100);
 					Console.Write($"{newArr[row, col]} ");
@@ -66,6 +73,8 @@ namespace hw6
 			}
 		}
 
+
+		//B6-P3/6. 1DMasiveSort.
 		public static void B6_P3()
 		{
 			int[] newArr = new int[5];
@@ -165,6 +174,30 @@ namespace hw6
 */
 			}
 			return sortedArr;
+		}
+
+
+		//B6-P5/6. CutString.
+		public static void B6_P5()
+		{
+			const int NUM_OF_CHARS = 13;
+
+			string consoleString, newString;
+			int numOfCharacters;
+
+			Console.Write("Введите предложение: ");
+			consoleString = Console.ReadLine();
+
+			numOfCharacters = consoleString.Length;
+			if (numOfCharacters > NUM_OF_CHARS)
+			{
+				newString = consoleString.Substring(0, NUM_OF_CHARS) + "...";
+			}
+			else
+			{
+				newString = consoleString;
+			}
+			Console.WriteLine(newString);
 		}
 
 	}

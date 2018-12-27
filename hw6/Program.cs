@@ -20,7 +20,10 @@ namespace hw6
 			//B6_P3();
 
 			//B6-P5/6. CutString.
-			B6_P5();
+			//B6_P5();
+
+			//B6-P6/6. ReplaceInPoem.
+			B6_P6();
 
 			Console.Read();
 		}
@@ -198,6 +201,48 @@ namespace hw6
 				newString = consoleString;
 			}
 			Console.WriteLine(newString);
+		}
+
+
+		//B6-P6/6. ReplaceInPoem.
+		public static void B6_P6()
+		{
+			string consoleString;
+			string[] stringArr = new string[10];
+			int wordCharCounter = 0, wordCounter = 0;
+
+			Console.WriteLine("Вводится стихотворение, строки разделяются символом \";\"");
+			Console.WriteLine("Строка разбивается на массив строк с заменой символов");
+
+			Console.Write("Введите стихотворение: ");
+			consoleString = Console.ReadLine();
+
+			for (int i = 0; i < consoleString.Length; i++)
+			{
+				if (consoleString[i] == ';')
+				{
+					wordCharCounter++;
+					stringArr[wordCounter++] = consoleString.Substring(i - wordCharCounter + 1, wordCharCounter);
+					wordCharCounter = 0;
+				}
+				else
+				{
+					wordCharCounter++;
+				}
+			}
+
+			Console.WriteLine("\nОно же, но в красивой форме:");
+			for (int i = 0; i < wordCounter; i++)
+			{
+				Console.WriteLine(stringArr[i]);
+				stringArr[i] = stringArr[i].Replace('о', 'а').Replace("л", "ль").Replace("ть", "т");
+			}
+
+			Console.WriteLine("\nОно же, но с заменой символов:");
+			for (int i = 0; i < wordCounter; i++)
+			{
+				Console.WriteLine(stringArr[i]);
+			}
 		}
 
 	}

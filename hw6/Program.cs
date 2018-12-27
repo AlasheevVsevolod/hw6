@@ -264,6 +264,8 @@ namespace hw6
 			int tmpVar = 0, userScore = 0;
 			ConsoleKey Button;
 
+			Console.WriteLine("Навигация стрелками");
+
 			PrintField(playfield, out currentPosition);
 
 			while (CheckCurrentField(playfield) == false)
@@ -332,6 +334,7 @@ namespace hw6
 			currentPosition = new int[2] { 0, 0 };
 
 			Console.Clear();
+			Console.WriteLine("Навигация стрелками\n");
 			for (int i = 0; i < playfield.GetLength(0); i++)
 			{
 				Console.WriteLine("-------------");

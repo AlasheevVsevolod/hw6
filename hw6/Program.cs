@@ -23,7 +23,7 @@ namespace hw6
 			//B6_P5();
 
 			//B6-P6/6. ReplaceInPoem.
-			//B6_P6();
+			B6_P6();
 
 			//B6-P4/6. *Pyatnashki.
 			//B4_P6();
@@ -211,7 +211,7 @@ namespace hw6
 		public static void B6_P6()
 		{
 			string consoleString;
-			string[] stringArr = new string[1];
+			string[] stringArr;
 
 			Console.WriteLine("Вводится четверостишие, строки разделяются символом \";\"");
 			Console.WriteLine("Строка разбивается на массив строк с заменой символов");
@@ -219,7 +219,6 @@ namespace hw6
 			Console.Write("Введите стихотворение: ");
 			consoleString = Console.ReadLine();
 
-//Вот тут я балдею. Объявляли массив размером 1, а после сплита можем получить хоть 10 элементов
 			stringArr = consoleString.Split(';');
 
 			Console.WriteLine("\nОно же, но в красивой форме:");

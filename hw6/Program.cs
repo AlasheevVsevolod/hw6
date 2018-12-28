@@ -219,6 +219,7 @@ namespace hw6
 			Console.Write("Введите стихотворение: ");
 			consoleString = Console.ReadLine();
 
+//Вот тут я балдею. Объявляли массив размером 1, а после сплита можем получить хоть 10 элементов
 			stringArr = consoleString.Split(';');
 
 			Console.WriteLine("\nОно же, но в красивой форме:");
